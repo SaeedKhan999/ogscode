@@ -1,0 +1,20 @@
+version: 0.1
+
+phases:
+  install:
+    commands:
+      - echo Install started on `date`
+  pre_build:
+    commands:
+      - echo Pre Build started on `date`
+  build:
+    commands:
+      - echo Build started on `date`
+      - ./gradlew assemble
+  post_build:
+    commands:
+      - echo Build completed on `date`
+artifacts:
+  files:
+    - build/libs/*.war
+    

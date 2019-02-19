@@ -1,0 +1,200 @@
+<html>
+<head>
+<title>Search Items</title>
+<style>
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a, .dropbtn {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover, .dropdown:hover .dropbtn {
+    background-color: #111;
+}
+
+.dropdown {
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+</style>
+</head>
+
+<body>
+<link rel="stylesheet" type="text/css" href="prac.css">
+
+
+	<CENTER> 	
+<font size=8>Online Grocery Shop Management System </font size=8> 
+	</CENTER>
+<br>
+<ul>
+  
+<li><a class="active" href="Logout.jsp">Logout</a></li>
+  </ul>
+
+
+	<SCRIPT language="JavaScript">
+  
+  	function startSearch()
+  	{
+		
+	 	if(document.frm.R1[1].checked)
+  		{
+  			if(document.frm.PTitle.value=="")
+			{
+				alert("You must enter a product title");
+				return;
+			}
+  		}
+    		
+  		if(document.frm.R1[2].checked)
+  		{
+	  		if(document.frm.PCompany.value=="")
+			{
+				alert("You must enter company name");
+			return;
+			}
+  		}	
+  	
+  		if(document.frm.R1[3].checked)
+  		{
+  			if(document.frm.PDealer.value=="")
+			{
+			alert("You must enter a dealer name");
+			return;
+			}
+  		}
+  	
+  		document.frm.action="search.jsp";
+  		document.frm.submit();
+ 	}
+
+  	</SCRIPT>
+  
+  	<%@ page errorPage="errorpage.jsp" import="java.net.*" %>
+	<%@ page import="java.io.*" %>
+	<%@ page import="java.sql.*" %>
+	<%
+	Connection con = null;
+
+	PreparedStatement stat = null;
+	ResultSet rs = null;
+	int ctr=0, flag=0;
+	try
+	{
+		Class.forName("org.postgresql.Driver");
+		con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/shop","postgres",""); 
+
+		stat = con.prepareStatement("select * from category_details");
+
+                rs=stat.executeQuery();
+	%>
+
+
+	<form name ="frm" method="POST">
+	<center>
+<font size="5">Search Products</font>
+</p></center>
+    	<BR><BR>
+  
+  	<table border="0" width="100%" height="196">
+    	<tr>
+      		<td width="17%" align="right" height="25">
+		<input type="radio" value="Category" checked name="R1"></td>
+      		<td width="32%" height="25">Search by Category</td>
+      		<td width="51%" height="25">
+      			<select size="1" name="ProductCategory">
+      			<option selected value="Select">Select Category</option>
+				<%
+				while(rs.next())
+				{
+				String category=rs.getString(2);%>
+	    			<option value="<%=category%>"><%=category%></option>
+  				<%}%>
+    			</select>
+    	      	</td>
+    	</tr>
+    	<tr>
+      		<td width="17%" align="right" height="25">
+<input type="radio" name="R1" value="Title"></td>
+      		<td width="32%" height="25">Search by Product Title</td>
+      		<td width="51%" height="25">
+<input type="text" name="PTitle" size="25"></td>
+    	</tr>
+    	<tr>
+    		<td width="17%" align="right" height="25">
+<input type="radio" name="R1" value="Company"></td>
+      		<td width="32%" height="25">Search by Company</td>
+      		<td width="51%" height="25">
+<input type="text" name="PCompany" size="25"></td>
+    	</tr>
+    	<tr>
+      		<td width="17%" align="right" height="25">
+<input type="radio" name="R1" value="Dealer"></td>
+      		<td width="32%" height="25">Search by Dealer</td>
+      		<td width="51%" height="25">
+<input type="text" name="PDealer" size="25"></td>
+    	</tr>
+    	<tr>      
+   	</tr>
+    	<tr>
+      		<td width="17%" align="right" height="21"></td>
+      		<td width="32%" height="21">
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" value="    Search    " name="Search" onClick="startSearch();">
+</td>
+      		<td width="51%" height="21">
+
+</td>
+    	</tr>
+  	</table>
+ 
+	</form>
+	<%
+	}
+	catch(Exception e)
+	{
+		out.print("Error = " + e + "<HR>");
+	}
+	finally
+	{
+		rs.close();
+		con.close();
+	}
+	%>
+</body>
+</html>

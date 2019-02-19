@@ -1,0 +1,60 @@
+create database shop;
+use shop;
+
+
+Create table Category_Details(CategoryID int primary key,CategoryName varchar(20) not null);
+
+
+Create table Product_Details(ProductID int primary key,CategoryID int references Category_Details(CategoryID) on delete cascade on update cascade,Title varchar(20) not null,Company varchar(20) not null,Dealer varchar(20) not null,Price float,Quantity integer,Description varchar(20) not null);
+
+
+Create table Order_Table(OrderID int primary key,UserID varchar(20) not null,TotalAmount integer,OrderDate varchar(20));
+
+
+Create table Order_Details(OrderID int references Order_Table(OrderID) on delete cascade on update cascade,ProductID int references Product_Details(ProductId) on delete cascade on update cascade,Quantity integer);
+
+
+
+CREATE TABLE User_Profile(UserName varchar(20) primary key,Password varchar(20) NOT NULL,FirstName varchar(20) NOT NULL,MiddleName varchar(20) not null,LastName varchar(20) NOT NULL,Address1 varchar(20) NOT NULL,Address2 varchar(20),City varchar(20) NOT NULL,State varchar(20) NOT NULL,PinCode varchar(20),Email varchar(20) NOT NULL,Phone varchar(20) not null);
+
+
+Create table User_Auth(UserName varchar references User_Profile(username),Password varchar(20));
+
+
+[[[[[[[[[[[[[[[[[[[[[[=======================]]]]]]]]]]]]]]]]]]]]]]]
+
+
+
+shop=# Create table Category_Details(CategoryID int primary key,CategoryName varchar(20) not null);
+NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "category_details_pkey" for table "category_details"
+CREATE TABLE
+
+shop=# Create table Product_Details(ProductID int primary key,CategoryID int references Category_Details(CategoryID) on delete cascade on update cascade,Title varchar(20) not null,Company varchar(20) not null,Dealer varchar(20) not null,Price float,Quantity integer,Description varchar(20) not null);
+NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "product_details_pkey" for table "product_details"
+CREATE TABLE
+
+shop=# Create table Order_Table(OrderID int primary key,UserID varchar(20) not null,TotalAmount integer,OrderDate date);
+NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "order_table_pkey" for table "order_table"
+CREATE TABLE
+
+shop=# Create table Order_Details(OrderID int references Order_Table(OrderID) on delete cascade on update cascade,ProductID int references Product_Details(ProductId) on delete cascade on update cascade,Quantity integer);
+CREATE TABLE
+
+shop=# Create table Temp_Detail(ProductID int,CategoryID int,Title varchar(20) not null,Company varchar(20) not null,Dealer varchar(20) not null,Price int,Quantity integer,Discription varchar(20) not null);
+CREATE TABLE
+
+
+shop=# CREATE TABLE User_Profile(UserName varchar(20) primary key,Password varchar(20) NOT NULL,FirstName varchar(20) NOT NULL,MiddleName varchar(20) not null,LastName varchar(20) NOT NULL,Address1 varchar(20) NOT NULL,Address2 varchar(20),City varchar(20) NOT NULL,State varchar(20) NOT NULL,PinCode varchar(20),Email varchar(20) NOT NULL,Phone varchar(20) not null);
+NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "user_profile_pkey" for table "user_profile"
+CREATE TABLE
+
+shop=# Create table User_Auth(UserName varchar references User_Profile(username),Password varchar(20));
+CREATE TABLE
+
+=============================================
+shop=# insert into User_Profile values('Administrator','admin','uzma','aslam','karjikar','mithanagar','kondhwa','pune','maharashtra','411048','uzma@gmail.com','786354987');
+INSERT 0 1
+
+shop=# insert into User_Auth values('Administrator','admin');
+INSERT 0 1
+

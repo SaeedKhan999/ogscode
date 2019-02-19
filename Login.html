@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+<style>
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a, .dropbtn {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover, .dropdown:hover .dropbtn {
+    background-color: #111;
+}
+
+.dropdown {
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+</style>
+</head>
+
+<body>
+
+<link rel="stylesheet" type="text/css" href="prac.css">
+
+<CENTER> 	
+<font size=8>Online Grocery Shop Management System </font size=8> 
+	</CENTER> 
+
+<br>
+<ul>
+  <li><a class="active" href="home.html">Home</a></li>
+<li><a class="active" href="Login.html">Login</a></li>
+  <li><a class="active" href="about.html">About us</a></li>
+ <li><a class="active" href="contact.html">Contact us</a></li>
+  </ul>	
+<SCRIPT language="JavaScript"> 
+ 	function validate()  	
+{	  	if(document.frm.UserName.value==""||document.frm.Password.value=="")		
+{  			alert("UserName or Password cannot be blank!!");			return;  		
+}  	  	document.frm.action="Validate.jsp";  
+		document.frm.submit();  
+	}	
+</SCRIPT>	
+<form name = frm method="POST">	
+<p align="center"><font size="5">
+<b>Login Form</b></font></p>  
+
+	
+<br><TABLE ALIGN="center" height="57"> 
+ 	<TR>  	
+	<TD >  <b>UserName:</b>  </TD>  	
+	<TD >  <input type="text" name="UserName" size="20" tabindex="1"> </TD>   
+	</TR>  
+ 	<TR>    		
+	<TD >   <b>Password:</b>   </TD>    		
+	<TD >    <input type="password" name="Password" size="20" tabindex="2">  </TD> 
+   	<TR align="center">    		
+<TD colspan=2>    		
+<input type="button" value="  Login  " name="B1" onclick="validate();" tabindex="3">    
+</TD> </TR>    
+	<TR >  	
+	<TD ><font size="4">New User?</font></TD>  	
+	<TD><a href="NewUser.html"><font size="4">Register</font></a></TD></TR>  
+	</TABLE> 
+ 	</form>
+</body>
+</HTML>

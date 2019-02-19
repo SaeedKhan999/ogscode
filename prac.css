@@ -1,0 +1,8 @@
+body{
+background-image:URL("OGS1.jpg");
+ background-repeat : no-repeat;
+-webkit-background-size:cover;
+-moz-background-size:cover;
+background-size:cover;
+}
+
